@@ -23,41 +23,55 @@ Or install it yourself as:
 
 ## Usage
 
+#### Quick Example
 
-#### Setup Available Plans
-
-Initialize the service and define available packages. 
-
-The cost is a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
+Initialize the service, define available plans and query for price with a time range or duration.
 
 ``` ruby
-plans = [
-    {
-        name: 'pre hour',
-        duration: 1.hour,
-        cost: 1000 # €10.00 for an hour
-    },
-    {
-        name: 'per day',
-        duration: 1.day,
-        cost: 2000 # €20.00 for 1 day
-    },
-    {
-        name: 'per week',
-        duration: 1.month,
-        cost: 100000 # €100.00 for a week
-    }
-]
+# New pricing calculation
+time_pricing = TimePricing.new
 
+# Add available plans
 
-# Calculate with two timestamps
+time_pricing.add_plan!({
+    name: 'pre hour',
+    duration: 1.hour,
+    cost: 1000 # €10.00 for an hour
+})
 
-time_pricing = TimePricing.new({plans: plans, start_time: Time.now, end_time: Time.now + 6.hours})
+time_pricing.add_plan!({
+    name: 'pre day',
+    duration: 1.day,
+    cost: 2000 # €20.00 for 1 day
+})
+
+time_pricing.add_plan!({
+    name: 'per week',
+    duration: 1.month,
+    cost: 100000 # €100.00 for a week
+})
+
+# Calculate with time ranges
+
+cost = time_pricing.for_time(Time.now, Time.now + 6.hours).amount
 
 # OR with duration
 
-time_pricing = TimePricing.new({plans: plans, duration: 6.hours})
+cost = time_pricing.for_duration(6.hours).amount
+
+puts cost
+# => 2000 
+# (€20.00 because 'per day' rate is cheaper than 6 * 'per hour' rate of €60.00 in total)
 ```
+
+#### Options
+
+* `cost`
+
+The cost is a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
+
+
+* `time_pricing.to_json`
 
 This would return a hash with all the details:
 
@@ -66,7 +80,7 @@ This would return a hash with all the details:
   start_time: "",
   end_time: "",
   cheapest_price: true,
-  packages: [
+  plans: [
     {...},
     {...}
   ],
@@ -79,7 +93,7 @@ This would return a hash with all the details:
     },
     {...} 
   ],
-  total_price: 1000
+  amount: 1000
 }
 ```
 
