@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-#### Quick Example
+#### Basic Example
 
 Initialize the service, define available plans and query for price with a time range or duration.
 
@@ -34,19 +34,19 @@ time_pricing = TimePricing.new
 # Add available plans
 
 time_pricing.add_plan!({
-    name: 'pre hour',
+    name: 'pre_hour',
     duration: 1.hour,
     cost: 1000 # €10.00 for an hour
 })
 
 time_pricing.add_plan!({
-    name: 'pre day',
+    name: 'pre_day',
     duration: 1.day,
     cost: 2000 # €20.00 for 1 day
 })
 
 time_pricing.add_plan!({
-    name: 'per week',
+    name: 'per_week',
     duration: 1.month,
     cost: 100000 # €100.00 for a week
 })
@@ -66,35 +66,72 @@ puts cost
 
 #### Options
 
-* `cost`
-
-The cost is a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
-
-
-* `time_pricing.to_json`
-
-This would return a hash with all the details:
+##### Initializing 
 
 ``` ruby
-{
-  start_time: "",
-  end_time: "",
-  cheapest_price: true,
-  plans: [
-    {...},
-    {...}
-  ],
-  pricing_breakdown: [
-    {
-      start_time: "",
-      end_time: "",
-      package: "",
-      cost: 1000
-    },
-    {...} 
-  ],
-  amount: 1000
-}
+TimePricing.new({
+    cheapest_price: true
+})
+```
+* `cheapest_price` *(optional, default `true`)*: Set to `false` to get the most expensive price chargable for the duration.
+
+##### Adding a plan
+
+``` ruby
+time_pricing.add_plan!({
+    name: 'per_hour',
+    duration: 1.hour,
+    cost: 2000
+})
+```
+
+* `name` *(required)*: a unique identifier for each plan
+* `duration` *(required)*: how long is this plan for
+* `cost` *(required)*: a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). Can be set to 0 for a free plan.
+
+##### Calculating price
+
+``` ruby
+time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).amount
+```
+
+* `start_time` *(required)*
+* `end_time` *(required)*
+
+
+``` ruby
+time_pricing.for_duration({duration: 6.hours}).amount
+```
+
+* `duration` *(required)*
+
+##### Other methods
+
+``` ruby
+pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
+
+# price in cents
+pricing_for_duration.amount 
+# => 2000
+
+# breakdown of how the amount was calculated and what plans were used
+pricing_for_duration.pricing_breakdown
+# [
+#    {
+#        start_time: "",
+#        end_time: "",
+#        name: "per_day",
+#        cost: 1000
+#    },
+#    {
+#        start_time: "",
+#        end_time: "",
+#        name: "per_day",
+#        cost: 1000
+#    },
+#    {...}
+# ]
+
 ```
 
 
