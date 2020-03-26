@@ -8,6 +8,7 @@ Calculate time based pricing based on duration or start + end time. Useful for s
 gem "time_pricing"
 ```
 
+
 ### 1. Setup available packages.
 
 Initialize the service and define available packages. 
@@ -26,6 +27,7 @@ time_pricing.add_package!(name: 'per day', duration: 1.day, cost: 2000)
 # €100.00 for a week
 time_pricing.add_package!(name: 'per week', duration: 1.month, cost: 100000)
 ```
+
 
 ### 2. Pass in start time and end time (or duration) to calculate pricing for that time. 
 
