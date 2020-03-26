@@ -21,9 +21,7 @@ Or install it yourself as:
 
     $ gem install time_pricing
 
-## Usage
-
-#### Basic Example
+## Basic Usage Example
 
 Initialize the service, define available plans and query for price with a time range or duration.
 
@@ -64,9 +62,9 @@ puts cost
 # (€20.00 because 'per day' rate is cheaper than 6 * 'per hour' rate of €60.00 in total)
 ```
 
-#### Options
+## Options
 
-##### Initializing 
+### Initializing 
 
 ``` ruby
 TimePricing.new({
@@ -75,7 +73,7 @@ TimePricing.new({
 ```
 * `cheapest_price` *(optional, default `true`)*: Set to `false` to get the most expensive price chargable for the duration.
 
-##### Adding a plan
+### Adding a plan
 
 ``` ruby
 time_pricing.add_plan!({
@@ -89,14 +87,14 @@ time_pricing.add_plan!({
 * `duration` *(required)*: how long is this plan for
 * `cost` *(required)*: a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). Can be set to 0 for a free plan.
 
-##### Removing a plan
+### Removing a plan
 
 ``` ruby
 # remove a plan with it's unique name
 time_pricing.remove_plan!('per_day')
 ```
 
-##### Calculating price
+### Calculating price
 
 ``` ruby
 time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).amount
@@ -112,7 +110,7 @@ time_pricing.for_duration({duration: 6.hours}).amount
 
 * `duration` *(required)*
 
-##### Other methods
+### Other methods
 
 ``` ruby
 # returns true/false as setup
