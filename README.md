@@ -4,7 +4,7 @@ Calculate time based pricing based on duration or start + end time. Useful for s
 
 # Getting Started
 
-```
+```ruby
 gem "time_pricing"
 ```
 
@@ -14,7 +14,7 @@ Initialize the service and define available packages.
 
 The cost is a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
 
-```
+``` ruby
 time_pricing = TimePricing.new
 
 time_pricing.add_package!(name: 'per hour', duration: 1.hour, cost: 1000) # €10.00
@@ -24,14 +24,13 @@ time_pricing.add_package!(name: 'per week', duration: 1.month, cost: 100000) # �
 
 ### 2. Pass in start time and end time (or duration) to calculate pricing for that time. 
 
-```
+``` ruby
 time_pricing.calculate_price(Time.now, Time.now + 6.hours)
 ```
 
 This would return a hash with all the details:
 
-```
-
+``` ruby
 {
   start_time: "",
   end_time: "",
