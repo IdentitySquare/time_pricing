@@ -17,9 +17,14 @@ The cost is a positive integer representing how much to charge in the smallest c
 ``` ruby
 time_pricing = TimePricing.new
 
-time_pricing.add_package!(name: 'per hour', duration: 1.hour, cost: 1000) # €10.00
-time_pricing.add_package!(name: 'per day', duration: 1.day, cost: 2000) # €20.00
-time_pricing.add_package!(name: 'per week', duration: 1.month, cost: 100000) # €100.00
+# €10.00 for an hour
+time_pricing.add_package!(name: 'per hour', duration: 1.hour, cost: 1000)
+
+# €20.00 for 1 day
+time_pricing.add_package!(name: 'per day', duration: 1.day, cost: 2000)
+
+# €100.00 for a week
+time_pricing.add_package!(name: 'per week', duration: 1.month, cost: 100000)
 ```
 
 ### 2. Pass in start time and end time (or duration) to calculate pricing for that time. 
