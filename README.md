@@ -1,37 +1,56 @@
-## Welcome to GitHub Pages
+# Time Pricing
 
-You can use the [editor on GitHub](https://github.com/IdentitySquare/time_pricing/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Calculate time based pricing based on duration or start + end time. Useful for services, bookings or appointments where pricing is based on duration. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# Getting Started
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+gem "time_pricing"
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### 1. Setup available packages.
 
-### Jekyll Themes
+Initialize the service and define available packages. 
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/IdentitySquare/time_pricing/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+The cost is a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency).
 
-### Support or Contact
+```
+time_pricing = TimePricing.new
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+time_pricing.add_package!(name: 'per hour', duration: 1.hour, cost: 1000) # €10.00
+time_pricing.add_package!(name: 'per day', duration: 1.day, cost: 2000) # €20.00
+time_pricing.add_package!(name: 'per week', duration: 1.month, cost: 100000) # €100.00
+```
+
+### 2. Pass in start time and end time (or duration) to calculate pricing for that time. 
+
+```
+time_pricing.calculate_price(Time.now, Time.now + 6.hours)
+```
+
+This would return a hash with all the details:
+
+```
+
+{
+  start_time: "",
+  end_time: "",
+  cheapest_price: true,
+  packages: [
+    {...},
+    {...}
+  ],
+  pricing_breakdown: [
+    {
+      start_time: "",
+      end_time: "",
+      package: "",
+      cost: 1000
+    },
+    {...} 
+  ],
+  total_price: 1000
+}
+```
+
+
