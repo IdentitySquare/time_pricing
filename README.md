@@ -89,6 +89,13 @@ time_pricing.add_plan!({
 * `duration` *(required)*: how long is this plan for
 * `cost` *(required)*: a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). Can be set to 0 for a free plan.
 
+##### Removing a plan
+
+``` ruby
+# remove a plan with it's unique name
+time_pricing.remove_plan!('per_day')
+```
+
 ##### Calculating price
 
 ``` ruby
@@ -108,6 +115,18 @@ time_pricing.for_duration({duration: 6.hours}).amount
 ##### Other methods
 
 ``` ruby
+# returns true/false as setup
+time_pricing.cheapest_price?
+
+# a list of plans that are setup. Returns an array of plan objects
+time_pricing.plans
+time.pricing.plans.each do |plan|
+    puts plan.name
+    puts plan.duration
+    puts plan.cost
+end
+
+
 pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
 
 # price in cents
@@ -120,12 +139,14 @@ pricing_for_duration.pricing_breakdown
 #    {
 #        start_time: "",
 #        end_time: "",
+#        duration: 0,
 #        name: "per_day",
 #        cost: 1000
 #    },
 #    {
 #        start_time: "",
 #        end_time: "",
+#        duration: 0,
 #        name: "per_day",
 #        cost: 1000
 #    },
