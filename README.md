@@ -30,7 +30,11 @@ time_pricing.add_package!(name: 'per week', duration: 1.month, cost: 100000)
 ### 2. Pass in start time and end time (or duration) to calculate pricing for that time. 
 
 ``` ruby
-time_pricing.calculate_price(Time.now, Time.now + 6.hours)
+time_pricing.calculate_price(start_time: Time.now, end_time: Time.now + 6.hours)
+
+# OR
+
+time_pricing.calculate_price(duration: 6.hours)
 ```
 
 This would return a hash with all the details:
