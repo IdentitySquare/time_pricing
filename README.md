@@ -68,10 +68,10 @@ puts cost
 
 ``` ruby
 TimePricing.new({
-    cheapest_price: true
+    combine_plans: true
 })
 ```
-* `cheapest_price` *(optional, default `true`)*: Set to `false` to get the most expensive price chargable for the duration.
+* `combine_plans` *(optional, default `true`)*: Set to `false` to not combine multiple plans to make up the duration. Each plan is only added with itself to make up the duration. 
 
 ### Adding a plan
 
