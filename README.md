@@ -33,7 +33,7 @@ time_pricing = TimePricing.new
 
 time_pricing.add_plan!({
     name: 'pre_hour',
-    duration: 1.hour,
+    duration: 1.hour, // duration in milliseconds
     cost: 1000 # €10.00 for an hour
 })
 
@@ -84,7 +84,7 @@ time_pricing.add_plan!({
 ```
 
 * `name` *(required)*: a unique identifier for each plan
-* `duration` *(required)*: how long is this plan for
+* `duration` *(required)*: milliseconds of how long is this plan for
 * `cost` *(required)*: a positive integer representing how much to charge in the smallest currency unit (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). Can be set to 0 for a free plan.
 
 ### Removing a plan
@@ -100,8 +100,8 @@ time_pricing.remove_plan!('per_day')
 time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).amount
 ```
 
-* `start_time` *(required)*
-* `end_time` *(required)*
+* `start_time` *(required)*: timestamp
+* `end_time` *(required)*: timestamp
 
 
 ``` ruby
