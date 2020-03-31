@@ -33,7 +33,7 @@ time_pricing = TimePricing.new
 
 time_pricing.add_plan!({
     name: 'per_hour',
-    duration: 1.hour, // duration in milliseconds
+    duration: 1.hour, # duration in milliseconds
     cost: 1000 # €10.00 for an hour
 })
 
