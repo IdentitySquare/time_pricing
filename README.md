@@ -3,7 +3,7 @@
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/time_pricing`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 
-Calculate time based pricing based on duration or start + end time. Useful for services, bookings or appointments where pricing is based on duration. 
+Calculate time based pricing based on duration or start + end time. Useful for services, bookings or appointments where pricing is based on duration.
 
 ## Installation
 
@@ -32,13 +32,13 @@ time_pricing = TimePricing.new
 # Add available plans
 
 time_pricing.add_plan!({
-    name: 'pre_hour',
+    name: 'per_hour',
     duration: 1.hour, // duration in milliseconds
     cost: 1000 # €10.00 for an hour
 })
 
 time_pricing.add_plan!({
-    name: 'pre_day',
+    name: 'per_day',
     duration: 1.day,
     cost: 2000 # €20.00 for 1 day
 })
@@ -58,20 +58,20 @@ cost = time_pricing.for_time(Time.now, Time.now + 6.hours).amount
 cost = time_pricing.for_duration(6.hours).amount
 
 puts cost
-# => 2000 
+# => 2000
 # (€20.00 because 'per day' rate is cheaper than 6 * 'per hour' rate of €60.00 in total)
 ```
 
 ## Options
 
-### Initializing 
+### Initializing
 
 ``` ruby
 TimePricing.new({
     combine_plans: true
 })
 ```
-* `combine_plans` *(optional, default `true`)*: Set to `false` to not combine multiple plans to make up the duration. Each plan is only added with itself to make up the duration. 
+* `combine_plans` *(optional, default `true`)*: Set to `false` to not combine multiple plans to make up the duration. Each plan is only added with itself to make up the duration.
 
 ### Adding a plan
 
@@ -128,7 +128,7 @@ end
 pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
 
 # price in cents
-pricing_for_duration.amount 
+pricing_for_duration.amount
 # => 2000
 
 # breakdown of how the amount was calculated and what plans were used
