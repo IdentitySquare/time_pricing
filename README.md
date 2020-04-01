@@ -114,7 +114,7 @@ time_pricing.for_duration({duration: 6.hours}).amount
 
 ``` ruby
 # returns true/false as setup
-time_pricing.cheapest_price?
+time_pricing.combine_plans?
 
 # a list of plans that are setup. Returns an array of plan objects
 time_pricing.plans
