@@ -133,11 +133,12 @@ pricing_for_duration.amount
 
 # breakdown of how the amount was calculated and what plans were used
 pricing_for_duration.pricing_breakdown
-# [
+# => [
 #    {
 #        start_time: "",
 #        end_time: "",
 #        duration: 0,
+#        extra_duration: 0,
 #        name: "per_day",
 #        cost: 1000
 #    },
@@ -145,6 +146,7 @@ pricing_for_duration.pricing_breakdown
 #        start_time: "",
 #        end_time: "",
 #        duration: 0,
+#        extra_duration: 0,
 #        name: "per_day",
 #        cost: 1000
 #    },
