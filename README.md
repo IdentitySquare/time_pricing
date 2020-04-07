@@ -157,7 +157,7 @@ pricing_for_duration.pricing_breakdown
 
 ## Known Issues
 
-* Stack too deep error when passing in a large duration because of the recurssive method.  
+If you have smaller duration plans and are looking for pricing for a large duration, you might encounter `stack level too deep` error. Consider limiting the duration you query a pricing for.   
 
 
 ## Development
