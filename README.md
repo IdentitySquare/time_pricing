@@ -51,11 +51,11 @@ time_pricing.add_plan!({
 
 # Calculate with time ranges
 
-cost = time_pricing.for_time(Time.now, Time.now + 6.hours).amount
+cost = time_pricing.for_time(Time.now, Time.now + 6.hours).cost
 
 # OR with duration
 
-cost = time_pricing.for_duration(6.hours).amount
+cost = time_pricing.for_duration(6.hours).cost
 
 puts cost
 # => 2000
@@ -97,7 +97,7 @@ time_pricing.remove_plan!('per_day')
 ### Calculating price
 
 ``` ruby
-time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).amount
+time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).cost
 ```
 
 * `start_time` *(required)*: timestamp
@@ -105,7 +105,7 @@ time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).amou
 
 
 ``` ruby
-time_pricing.for_duration({duration: 6.hours}).amount
+time_pricing.for_duration({duration: 6.hours}).cost
 ```
 
 * `duration` *(required)*
@@ -128,12 +128,12 @@ end
 pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
 
 # price in cents
-pricing_for_duration.amount
+pricing_for_duration.cost
 # => 2000
 
-# breakdown of how the amount was calculated and what plans were used
+# breakdown of how the cost was calculated and what plans were used
 pricing_for_duration.pricing_breakdown
-# => [
+# [
 #    {
 #        start_time: "",
 #        end_time: "",
@@ -174,4 +174,19 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 Everyone interacting in the TimePricing project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/time_pricing/blob/master/CODE_OF_CONDUCT.md).
 
+## Contributors
 
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Annajoe96"><img src="https://avatars0.githubusercontent.com/u/57370408?v=4" width="100px;" alt=""/><br /><sub><b>Anna Joe</b></sub></a></td>
+    <td align="center"><a href="https://github.com/danielpaul"><img src="https://avatars3.githubusercontent.com/u/333233?v=4" width="100px;" alt=""/><br /><sub><b>Daniel Paul</b></sub></a></td>
+    <td align="center"><a href="https://github.com/iJohnPaul"><img src="https://avatars0.githubusercontent.com/u/25507937?v=4" width="100px;" alt=""/><br /><sub><b>John Paul</b></sub></a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
