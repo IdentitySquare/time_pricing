@@ -155,6 +155,10 @@ pricing_for_duration.pricing_breakdown
 
 ```
 
+## Known Issues
+
+* Stack too deep error when passing in a large duration because of the recurssive method.  
+
 
 ## Development
 
