@@ -1,9 +1,6 @@
 # TimePricing
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/time_pricing`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-
-Calculate time based pricing based on duration or start + end time. Useful for services, bookings or appointments where pricing is based on duration.
+Calculate time based pricing based on duration or start + end time. Useful for services, bookings or appointments where pricing is based on duration. This can be used with repeating combination of plans or without combining plans.
 
 ## Installation
 
@@ -154,6 +151,23 @@ pricing_for_duration.pricing_breakdown
 # ]
 
 ```
+
+## Caching the combinations externally
+
+TimePricing uses cache to keep track of pricing that we have calculated already to speed up the going through all the combinations possible if `combine_plan: true`. This significantly speeds up the calculations. This can be saved externally from the gem and can be set for even faster look up /for the same plans/.
+
+
+``` ruby
+# Get the cache
+# Save this in your application's persisted cache
+saved_cache = time_pricing.cache
+
+# Setting cache back for another session
+TimePricing.new({cache: saved_cache})
+```
+
+*Important:* Be sure to clear your externally saved cache if you add, remove or change plans.
+
 
 ## Known Issues
 
