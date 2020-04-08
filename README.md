@@ -171,7 +171,7 @@ TimePricing.new({cache: saved_cache})
 
 ## ⚠️ Known Issues
 
-If you have smaller duration plans and are looking for pricing for a large duration, you might encounter `stack level too deep` error. Consider limiting the duration you query a pricing for.   
+If you have smaller duration plans and are looking for pricing for a large duration (approx. over 500 times the largest duration plan - which is a lot!), you might encounter `stack level too deep` error. Consider limiting the duration you query a pricing for.   
 
 
 ## 🤓 Contributing
