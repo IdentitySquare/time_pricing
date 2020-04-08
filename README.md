@@ -110,6 +110,37 @@ time_pricing.for_duration({duration: 6.hours}).cost
 ### Other methods
 
 ``` ruby
+pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
+
+# price in cents
+pricing_for_duration.cost
+# => 2000
+
+# returns extra duration (in milliseconds) the user has paid for
+pricing_for_duration.extra_duration
+# => 20000
+
+# breakdown of how the cost was calculated and what plans were used
+pricing_for_duration.breakdown
+# [
+#    {
+#        start_time: "",
+#        end_time: "",
+#        duration: 0,
+#        name: "per_day",
+#        cost: 1000
+#    },
+#    {
+#        start_time: "",
+#        end_time: "",
+#        duration: 0,
+#        name: "per_day",
+#        cost: 1000
+#    },
+#    {...}
+# ]
+# start_time and end_time only appears if using for_time to calculate cost
+
 # returns true/false as setup
 time_pricing.combine_plans?
 
@@ -120,35 +151,6 @@ time.pricing.plans.each do |plan|
     puts plan.duration
     puts plan.cost
 end
-
-
-pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
-
-# price in cents
-pricing_for_duration.cost
-# => 2000
-
-# breakdown of how the cost was calculated and what plans were used
-pricing_for_duration.pricing_breakdown
-# [
-#    {
-#        start_time: "",
-#        end_time: "",
-#        duration: 0,
-#        extra_duration: 0,
-#        name: "per_day",
-#        cost: 1000
-#    },
-#    {
-#        start_time: "",
-#        end_time: "",
-#        duration: 0,
-#        extra_duration: 0,
-#        name: "per_day",
-#        cost: 1000
-#    },
-#    {...}
-# ]
 
 ```
 
