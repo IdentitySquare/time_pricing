@@ -114,11 +114,13 @@ pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
 
 # price in cents
 pricing_for_duration.cost
-# => 2000
 
-# returns extra duration (in milliseconds) the user has paid for
+# Total duration (in milliseconds) the plans make up
+pricing_for_duration.total_duration
+
+# any extra duration (in milliseconds) than the requested
+# to make up for the requested duration
 pricing_for_duration.extra_duration
-# => 20000
 
 # breakdown of how the cost was calculated and what plans were used
 pricing_for_duration.breakdown
