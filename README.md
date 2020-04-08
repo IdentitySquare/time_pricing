@@ -1,8 +1,8 @@
-# TimePricing
+# ⏳💰 TimePricing
 
 Calculate time based pricing based on duration or start + end time. Useful for services, bookings or appointments where pricing is based on duration. This can be used with repeating combination of plans or without combining plans.
 
-## Installation
+## 🛠Installation
 
 Add this line to your application's Gemfile:
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
     $ gem install time_pricing
 
-## Basic Usage Example
+## ✅ Basic Usage Example
 
 Initialize the service, define available plans and query for price with a time range or duration.
 
@@ -59,7 +59,7 @@ puts cost
 # (€20.00 because 'per day' rate is cheaper than 6 * 'per hour' rate of €60.00 in total)
 ```
 
-## Options
+## 🛠 Options
 
 ### Initializing
 
@@ -152,7 +152,7 @@ pricing_for_duration.pricing_breakdown
 
 ```
 
-## Caching the combinations externally
+## 🏎 Caching the combinations externally
 
 TimePricing uses cache to keep track of pricing that we have calculated already to speed up the going through all the combinations possible if `combine_plan: true`. This significantly speeds up the calculations. This can be saved externally from the gem and can be set for even faster look up /for the same plans/.
 
@@ -169,30 +169,30 @@ TimePricing.new({cache: saved_cache})
 *Important:* Be sure to clear your externally saved cache if you add, remove or change plans.
 
 
-## Known Issues
+## ⚠️ Known Issues
 
 If you have smaller duration plans and are looking for pricing for a large duration, you might encounter `stack level too deep` error. Consider limiting the duration you query a pricing for.   
 
 
-## Development
+## 🤓 Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/identitysquare/time_pricing. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+### Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/identitysquare/time_pricing. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-## License
+### License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-## Code of Conduct
+### Code of Conduct
 
 Everyone interacting in the TimePricing project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/time_pricing/blob/master/CODE_OF_CONDUCT.md).
 
-## Contributors
+### Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START -->
 <!-- prettier-ignore-start -->
