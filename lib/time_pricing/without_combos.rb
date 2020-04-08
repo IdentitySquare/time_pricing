@@ -1,5 +1,5 @@
 module TimePricing
-  class << self
+  module WithoutCombos
 
   end
 end
