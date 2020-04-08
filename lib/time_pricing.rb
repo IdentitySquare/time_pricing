@@ -3,12 +3,15 @@ RubyVM::InstructionSequence.compile_option = {
   trace_instruction: false
 }
 
-require "time_pricing/version"
+require 'time_pricing/version'
+require 'time_pricing/utils'
 
 module TimePricing
   class Error < StandardError; end
 
-  def self.hi
-    puts "Hello world!"
+  class << self
+
+
+
   end
 end
