@@ -3,12 +3,20 @@ RubyVM::InstructionSequence.compile_option = {
   trace_instruction: false
 }
 
-require "time_pricing/version"
+require 'time_pricing/plan'
+require 'time_pricing/utils'
+require 'time_pricing/config'
+require 'time_pricing/base'
+require 'time_pricing/calculation'
 
 module TimePricing
   class Error < StandardError; end
+  class ParameterMissing < StandardError; end
 
-  def self.hi
-    puts "Hello world!"
+  class << self
+    def new(**args)
+      config = TimePricing::Config.new(args)
+      TimePricing::Base.new(config)
+    end
   end
 end
