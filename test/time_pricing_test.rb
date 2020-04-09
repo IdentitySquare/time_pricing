@@ -320,7 +320,6 @@ class TimePricingTest < Minitest::Test
       duration: 10.hour,
       cost: 600
     })
-
   end
 
   def setup_five_plans(**args)
@@ -355,7 +354,6 @@ class TimePricingTest < Minitest::Test
       duration: 12.hour,
       cost: 950
     })
-
   end
 
 end
