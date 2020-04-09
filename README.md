@@ -1,6 +1,6 @@
 # ⏳💰 TimePricing
 
-Calculate time based pricing based on duration or start + end time. Useful for services, bookings or appointments where pricing is based on duration. This can be used with repeating combination of plans or without combining plans.
+Calculate time based pricing based on duration or start time + end time. Useful for services, bookings or appointments where pricing is based on duration. This can be used with repeating combination of plans or without combining plans.
 
 ## 🛠Installation
 
