@@ -2,10 +2,10 @@ module TimePricing
   class Utils
     class << self
 
-      def plan_structure(amount, breakdown=[])
+      def cost_struct(cost, plans_used=[])
         {
-          amount: amount,
-          pricing_breakdown: breakdown
+          cost: cost,
+          plans_used: plans_used
         }
       end
 

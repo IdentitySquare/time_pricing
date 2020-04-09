@@ -31,19 +31,13 @@ time_pricing = TimePricing.new
 time_pricing.add_plan!({
     name: 'per_hour',
     duration: 1.hour, # duration in milliseconds
-    cost: 1000 # €10.00 for an hour
+    cost: 500 # €5.00 for an hour
 })
 
 time_pricing.add_plan!({
     name: 'per_day',
     duration: 1.day,
     cost: 2000 # €20.00 for 1 day
-})
-
-time_pricing.add_plan!({
-    name: 'per_week',
-    duration: 1.month,
-    cost: 100000 # €100.00 for a week
 })
 
 # Calculate with time ranges
@@ -91,10 +85,16 @@ time_pricing.add_plan!({
 time_pricing.remove_plan!('per_day')
 ```
 
+### Other methods
+``` ruby
+# a list of plans that are setup. Returns an array of plan objects
+time_pricing.plans
+```
+
 ### Calculating price
 
 ``` ruby
-time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).cost
+time_pricing.for_time(Time.now, Time.now + 6.hours).cost
 ```
 
 * `start_time` *(required)*: timestamp
@@ -102,28 +102,36 @@ time_pricing.for_time({start_time: Time.now, end_time: Time.now + 6.hours}).cost
 
 
 ``` ruby
-time_pricing.for_duration({duration: 6.hours}).cost
+time_pricing.for_duration(6.hours).cost
 ```
 
 * `duration` *(required)*
 
-### Other methods
+### Calculation breakdown
+How did we get to the final cost.
 
 ``` ruby
-pricing_for_duration = time_pricing.for_duration({duration: 6.hours})
+calculation = time_pricing.for_duration(6.hours)
 
 # price in cents
-pricing_for_duration.cost
+calculation.cost
+
+# if using the for_time method
+calculation.start_time
+calculation.end_time
+
+# the requested duration for pricing
+calculation.duration
 
 # Total duration (in milliseconds) the plans make up
-pricing_for_duration.total_duration
+calculation.total_duration
 
 # any extra duration (in milliseconds) than the requested
 # to make up for the requested duration
-pricing_for_duration.extra_duration
+calculation.extra_duration
 
 # breakdown of how the cost was calculated and what plans were used
-pricing_for_duration.breakdown
+calculation.breakdown
 # [
 #    {
 #        start_time: "",
@@ -142,17 +150,6 @@ pricing_for_duration.breakdown
 #    {...}
 # ]
 # start_time and end_time only appears if using for_time to calculate cost
-
-# returns true/false as setup
-time_pricing.combine_plans?
-
-# a list of plans that are setup. Returns an array of plan objects
-time_pricing.plans
-time.pricing.plans.each do |plan|
-    puts plan.name
-    puts plan.duration
-    puts plan.cost
-end
 
 ```
 
