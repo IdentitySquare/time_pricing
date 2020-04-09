@@ -4,6 +4,7 @@ module TimePricing
 
     def initialize(config)
       @config = config
+      @start_time = nil
     end
 
     def for_time(start_time, end_time)
@@ -32,20 +33,24 @@ module TimePricing
 
     def breakdown
       result = []
+      current_start_time = @start_time
 
       @plans_used.each do |plan_name|
-        plan = @config.plans[plan_name].to_json
-
-        plan.merge!({
-          duration: 0
-        })
+        plan = @config.plans[plan_name]
+        plan_json = plan.to_json
 
         if @start_time
-          plan.merge!({
-            start_time: "",
-            end_time: ""
+          end_time = @start_time + plan.duration
+
+          plan_json.merge!({
+            start_time: current_start_time,
+            end_time: end_time
           })
+
+          current_start_time = end_time + 1
         end
+
+        result << plan_json
       end
 
       result
@@ -72,11 +77,11 @@ module TimePricing
       costs = []
 
       @config.plans.each do |key, plan|
-        cost = cost_for_plan(plan, duration)
-        costs << Utils.cost_struct(cost, [plan.name])
+        costs << cost_for_plan(plan, duration)
       end
 
-      costs.min_by{|n| n[:cost]}
+      # puts costs
+      costs.min_by{|n| n[:cost] }
     end
 
 
@@ -85,7 +90,7 @@ module TimePricing
 
       Utils.add_hash(
         Utils.cost_struct(plan.cost, [plan.name]),
-        cost_for_plan(plan.cost, duration - plan.duration)
+        cost_for_plan(plan, duration - plan.duration)
       )
     end
 
@@ -102,7 +107,7 @@ module TimePricing
 
       @config.plans.each do |_key, plan|
         current_plan = Utils.cost_struct(plan.cost, [plan.name])
-        remainder = best_price_with_combos(duration - plan.duration)
+        remainder = best_cost_with_combos(duration - plan.duration)
         charges << Utils.add_hash(current_plan, remainder)
       end
 
